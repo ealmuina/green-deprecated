@@ -6,4 +6,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Execute tests
-        run: docker-compose -f docker-compose.dev.yml  run -e "RAILS_ENV=test" web rake test
+        run: docker-compose -f docker-compose.dev.yml run -e "RAILS_ENV=test" web rake test
