@@ -1,0 +1,14 @@
+services:
+  web:
+    environment:
+      - RAILS_ENV=production
+      - RACK_ENV=production
+    build:
+      context: .
+      args:
+        - BUILD_ENV=production
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+    command: rails server -b 0.0.0.0 -P /dev/null
