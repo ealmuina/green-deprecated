@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build the Docker image
+      - name: Build Docker image
         run: docker-compose -f docker-compose.dev.yml build
       - name: Execute tests
-        run: docker-compose -f docker-compose.dev.yml exec web rails t
+        run: docker-compose -f docker-compose.dev.yml run -e "RAILS_ENV=test" web rake test
