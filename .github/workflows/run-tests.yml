@@ -1,0 +1,11 @@
+name: run-tests
+on: [ pull_request ]
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker-compose -f docker-compose.dev.yml build
+      - name: Execute tests
+        run: docker-compose -f docker-compose.dev.yml exec web rails t
