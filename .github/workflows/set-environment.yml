@@ -1,0 +1,11 @@
+name: set-environment
+runs:
+  using: "composite"
+  steps:
+    - name: Create .env file
+      run: |
+        touch .env
+        echo SECRET_TOKEN=${{ secrets.SECRET_TOKEN }} >> .env
+        echo CACHE_URL=${{ secrets.CACHE_URL }} >> .env
+        echo JOB_WORKER_URL=${{ secrets.JOB_WORKER_URL }} >> .env
+        cat .env
