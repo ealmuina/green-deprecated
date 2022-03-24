@@ -8,8 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: ./.github/set-environment
+        with:
+          secret-token: ${{ secrets.SECRET_TOKEN }}
+          cache-url: ${{ secrets.CACHE_URL }}
+          job-worker-url: ${{ secrets.JOB_WORKER_URL }}
+
       - name: Build Docker image
         run: docker-compose -f docker-compose.dev.yml build
+
       - name: Execute tests
         run: docker-compose -f docker-compose.dev.yml run -e "RAILS_ENV=test" web rake test
 
@@ -18,6 +25,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - uses: ./.github/set-environment
+        with:
+          secret-token: ${{ secrets.SECRET_TOKEN }}
+          cache-url: ${{ secrets.CACHE_URL }}
+          job-worker-url: ${{ secrets.JOB_WORKER_URL }}
+
       - name: Deploy to production server
         uses: appleboy/ssh-action@master
         with:
