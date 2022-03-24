@@ -1,23 +1,14 @@
 name: run-tests
 on: [ pull_request ]
 jobs:
-  set-environment:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Create .env file
-        run: |
-          touch .env
-          echo SECRET_TOKEN=${{ secrets.SECRET_TOKEN }} >> .env
-          echo CACHE_URL=${{ secrets.CACHE_URL }} >> .env
-          echo JOB_WORKER_URL=${{ secrets.JOB_WORKER_URL }} >> .env
-          cat .env
-
   run-tests:
-    needs: set-environment
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: ./.github/set-environment
+
       - name: Build Docker image
         run: docker-compose -f docker-compose.dev.yml build
+
       - name: Execute tests
         run: docker-compose -f docker-compose.dev.yml run -e "RAILS_ENV=test" web rake test
