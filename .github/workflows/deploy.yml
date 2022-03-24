@@ -41,6 +41,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd green
+            git stash
             git checkout main
             git pull
             touch .env
