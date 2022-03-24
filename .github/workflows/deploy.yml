@@ -45,9 +45,8 @@ jobs:
             git checkout main
             git pull
             touch .env
-            echo SECRET_TOKEN=${{ secrets.SECRET_TOKEN }} >> .env
+            echo SECRET_TOKEN=${{ secrets.SECRET_TOKEN }} > .env
             echo CACHE_URL=${{ secrets.CACHE_URL }} >> .env
             echo JOB_WORKER_URL=${{ secrets.JOB_WORKER_URL }} >> .env
-            cat .env
             docker-compose -f docker-compose.prod.yml build
             sudo systemctl restart green.service
