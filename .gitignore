@@ -36,3 +36,6 @@
 
 # Ignore RubyMine environment
 /.idea
+
+# Ignore environment variables
+/.env
