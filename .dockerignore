@@ -1,0 +1,5 @@
+.git
+.dockerignore
+.env
+green/node_modules
+green/vendor/bundle
