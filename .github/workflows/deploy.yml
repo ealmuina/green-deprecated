@@ -20,7 +20,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./set-environment.yml
       - name: Build Docker image
         run: docker-compose -f docker-compose.dev.yml build
       - name: Execute tests
@@ -42,5 +41,10 @@ jobs:
             cd green
             git checkout main
             git pull
+            touch .env
+            echo SECRET_TOKEN=${{ secrets.SECRET_TOKEN }} >> .env
+            echo CACHE_URL=${{ secrets.CACHE_URL }} >> .env
+            echo JOB_WORKER_URL=${{ secrets.JOB_WORKER_URL }} >> .env
+            cat .env
             docker-compose -f docker-compose.prod.yml build
             sudo systemctl restart green.service
