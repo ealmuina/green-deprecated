@@ -1,0 +1,22 @@
+name: set-environment
+description: 'Set environment variables for the action'
+inputs:
+  secret-token:
+    description: 'Secret token'
+    required: true
+  cache-url:
+    description: 'Cache URL'
+    required: true
+  job-worker-url:
+    description: 'Job Worker URL'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        touch .env
+        echo SECRET_TOKEN=${{ inputs.secret-token }} >> .env
+        echo CACHE_URL=${{ inputs.cache-url }} >> .env
+        echo JOB_WORKER_URL=${{ inputs.job-worker-url }} >> .env
+        cat .env
+      shell: bash

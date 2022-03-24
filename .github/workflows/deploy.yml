@@ -8,15 +8,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: ./.github/set-environment
+        with:
+          secret-token: ${{ secrets.SECRET_TOKEN }}
+          cache-url: ${{ secrets.CACHE_URL }}
+          job-worker-url: ${{ secrets.JOB_WORKER_URL }}
+
       - name: Build Docker image
         run: docker-compose -f docker-compose.dev.yml build
+
       - name: Execute tests
         run: docker-compose -f docker-compose.dev.yml run -e "RAILS_ENV=test" web rake test
+
   deploy:
     needs: run-tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - uses: ./.github/set-environment
+        with:
+          secret-token: ${{ secrets.SECRET_TOKEN }}
+          cache-url: ${{ secrets.CACHE_URL }}
+          job-worker-url: ${{ secrets.JOB_WORKER_URL }}
+
       - name: Deploy to production server
         uses: appleboy/ssh-action@master
         with:
@@ -28,5 +43,10 @@ jobs:
             cd green
             git checkout main
             git pull
+            touch .env
+            echo SECRET_TOKEN=${{ secrets.SECRET_TOKEN }} >> .env
+            echo CACHE_URL=${{ secrets.CACHE_URL }} >> .env
+            echo JOB_WORKER_URL=${{ secrets.JOB_WORKER_URL }} >> .env
+            cat .env
             docker-compose -f docker-compose.prod.yml build
             sudo systemctl restart green.service
