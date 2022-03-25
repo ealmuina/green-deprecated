@@ -45,7 +45,7 @@ jobs:
           script: |
             # Turn service off
             cd green
-            systemctl stop green.service
+            sudo systemctl stop green.service
             
             # Pull new code
             git stash
@@ -60,7 +60,7 @@ jobs:
             
             # Build and restart service
             docker-compose -f docker-compose.prod.yml build
-            systemctl start green.service
+            sudo systemctl start green.service
             
             # Apply database migrations
             docker-compose -f docker-compose.prod.yml exec web rails db:migrate
