@@ -30,9 +30,6 @@ gem "jbuilder"
 # Sidekiq as an asynchronous background processing library [https://github.com/mperham/sidekiq/wiki]
 gem "sidekiq", "~> 6.4"
 
-# Redis-rails for caching [https://github.com/redis-store/redis-rails]
-gem "redis-rails", "~> 5.0"
-
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
