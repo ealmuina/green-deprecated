@@ -14,5 +14,5 @@ RUN if [ "$BUILD_ENV" = "development" ]; then \
 
 # Precompile Rails assets if building in production
 RUN if [ "$BUILD_ENV" = "production" ]; then \
-      bundle exec rake assets:precompile;\
+      RAILS_ASSETS_PRECOMPILE=true bundle exec rake assets:precompile;\
     fi;
