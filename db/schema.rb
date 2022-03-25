@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_23_184159) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_25_123229) do
   create_table "firmwares", force: :cascade do |t|
     t.integer "node_type"
     t.integer "version"
@@ -33,7 +33,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_23_184159) do
 
   create_table "records", force: :cascade do |t|
     t.integer "node_id", null: false
-    t.date "date"
     t.integer "moisture"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

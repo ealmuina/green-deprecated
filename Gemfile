@@ -30,6 +30,9 @@ gem "jbuilder"
 # Sidekiq as an asynchronous background processing library [https://github.com/mperham/sidekiq/wiki]
 gem "sidekiq", "~> 6.4"
 
+# MQTT client for the Ruby language [https://github.com/eclipse/paho.mqtt.ruby]
+gem "paho-mqtt"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
