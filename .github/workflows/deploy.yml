@@ -17,6 +17,9 @@ jobs:
       - name: Build Docker image
         run: docker-compose -f docker-compose.dev.yml build
 
+      - name: Apply migrations to test DB
+        run: docker-compose -f docker-compose.dev.yml run -e "RAILS_ENV=test" web rails db:migrate
+
       - name: Execute tests
         run: docker-compose -f docker-compose.dev.yml run -e "RAILS_ENV=test" web rake test
 
