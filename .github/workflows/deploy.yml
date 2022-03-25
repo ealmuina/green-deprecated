@@ -40,13 +40,24 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           script: |
+            # Turn service off
             cd green
+            sudo systemctl stop green.service
+            
+            # Pull new code
             git stash
             git checkout main
             git pull
+            
+            # Create .env file
             touch .env
             echo SECRET_TOKEN=${{ secrets.SECRET_TOKEN }} > .env
             echo CACHE_URL=${{ secrets.CACHE_URL }} >> .env
             echo JOB_WORKER_URL=${{ secrets.JOB_WORKER_URL }} >> .env
+            
+            # Build and restart service
             docker-compose -f docker-compose.prod.yml build
-            sudo systemctl restart green.service
+            sudo systemctl start green.service
+            
+            # Apply database migrations
+            docker-compose -f docker-compose.prod.yml exec web rails db:migrate
