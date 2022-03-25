@@ -58,9 +58,11 @@ jobs:
             echo CACHE_URL=${{ secrets.CACHE_URL }} >> .env
             echo JOB_WORKER_URL=${{ secrets.JOB_WORKER_URL }} >> .env
             
-            # Build and restart service
+            # Build containers
             docker-compose -f docker-compose.prod.yml build
-            sudo systemctl start green.service
             
             # Apply database migrations
-            docker-compose -f docker-compose.prod.yml exec web rails db:migrate
+            docker-compose -f docker-compose.prod.yml run web rails db:migrate
+            
+            # Turn service on
+            sudo systemctl start green.service
