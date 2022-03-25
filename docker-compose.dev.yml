@@ -9,6 +9,8 @@ services:
   sidekiq:
     build:
       context: .
+    volumes:
+      - .:/usr/src/app
     command: bundle exec sidekiq
     links:
       - redis
