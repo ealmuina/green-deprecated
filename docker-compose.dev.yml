@@ -6,17 +6,6 @@ services:
     volumes:
       - green-redis:/var/lib/redis/data
 
-  sidekiq:
-    build:
-      context: .
-    volumes:
-      - .:/usr/src/app
-    command: bundle exec sidekiq
-    links:
-      - redis
-    env_file:
-      - .env
-
   web:
     build:
       context: .
@@ -27,6 +16,17 @@ services:
     volumes:
       - .:/usr/src/app
     command: rails server -b 0.0.0.0 -P /dev/null
+    links:
+      - redis
+    env_file:
+      - .env
+
+  sidekiq:
+    build:
+      context: .
+    volumes:
+      - .:/usr/src/app
+    command: bundle exec sidekiq
     links:
       - redis
     env_file:
