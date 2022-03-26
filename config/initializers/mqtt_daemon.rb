@@ -1,9 +1,14 @@
 require 'json'
 require 'paho-mqtt'
 
-unless ENV['RAILS_ENV'] == 'test'
-  ### Create a simple client with default attributes
-  client = PahoMqtt::Client.new
+if ENV['RAILS_ENV'] != 'test' && defined?(::Rails::Server)
+  ### Create client
+  client = PahoMqtt::Client.new(
+    host: ENV["MQTT_BROKER_HOST"],
+    port: ENV["MQTT_BROKER_PORT"],
+    persistent: true,
+    reconnect_limit: -1
+  )
 
   ### Callbacks
   client.on_message do |message|
@@ -22,7 +27,7 @@ unless ENV['RAILS_ENV'] == 'test'
   end
 
   ### Connect to the MQTT server
-  client.connect(ENV["MQTT_BROKER_HOST"], ENV["MQTT_BROKER_PORT"])
+  client.connect
 
   ### Subscribe to topics
   client.subscribe("green/record", 2)
