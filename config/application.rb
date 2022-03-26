@@ -26,13 +26,6 @@ module App
     config.log_tags = [:subdomain, :uuid]
     config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
 
-    # Since we're using Redis for Sidekiq, we might as well use Redis to back our cache store.
-    # This keeps our application stateless as well.
-    config.cache_store = :redis_cache_store, { url: ENV['CACHE_URL'], namespace: 'green::cache' }
-
-    # Use Sidekiq as the asynchronous background job queue.
-    config.active_job.queue_adapter = :sidekiq
-
     # Disable warning about using SQLite3 in production.
     config.active_record.sqlite3_production_warning = false
   end
