@@ -5,7 +5,8 @@ class MqttJob
   include Sidekiq::Job
 
   def perform(*args)
-    RedisMutex.with_lock(:mqtt_mutex) do
+    mutex = RedisMutex.new(:mqtt_mutex, expire: 1000.years)
+    if mutex.lock
       ### Create a simple client with default attributes
       client = PahoMqtt::Client.new
 
