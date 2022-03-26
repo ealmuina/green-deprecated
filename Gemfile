@@ -27,12 +27,6 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
-# Sidekiq as an asynchronous background processing library [https://github.com/mperham/sidekiq/wiki]
-gem "sidekiq", "~> 6.4"
-
-# Distributed mutex using Redis [
-gem "redis-mutex"
-
 # MQTT client for the Ruby language [https://github.com/eclipse/paho.mqtt.ruby]
 gem "paho-mqtt"
 

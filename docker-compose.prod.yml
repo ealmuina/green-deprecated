@@ -1,11 +1,4 @@
 services:
-  redis:
-    image: redis:6
-    ports:
-      - '6379:6379'
-    volumes:
-      - green-redis:/var/lib/redis/data
-
   web:
     environment:
       - RAILS_ENV=production
@@ -19,26 +12,5 @@ services:
     volumes:
       - .:/usr/src/app
     command: rails server -b 0.0.0.0 -P /dev/null
-    links:
-      - redis
     env_file:
       - .env
-
-  sidekiq:
-    environment:
-      - RAILS_ENV=production
-      - RACK_ENV=production
-    build:
-      context: .
-      args:
-        - BUILD_ENV=production
-    volumes:
-      - .:/usr/src/app
-    command: bundle exec sidekiq
-    links:
-      - redis
-    env_file:
-      - .env
-
-volumes:
-  green-redis:
