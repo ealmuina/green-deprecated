@@ -28,5 +28,10 @@ module App
 
     # Disable warning about using SQLite3 in production.
     config.active_record.sqlite3_production_warning = false
+
+    # Per https://github.com/rails/sprockets-rails/issues/376
+    logger = ActiveSupport::Logger.new(STDOUT)
+    logger.formatter = config.log_formatter
+    config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 end
