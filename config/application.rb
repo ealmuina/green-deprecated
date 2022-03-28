@@ -33,5 +33,9 @@ module App
     logger = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
+
+    # Serve static assets
+    config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
+    config.serve_static_assets = true
   end
 end
