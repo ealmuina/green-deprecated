@@ -33,6 +33,9 @@ gem "jbuilder"
 # MQTT client for the Ruby language [https://github.com/eclipse/paho.mqtt.ruby]
 gem "paho-mqtt"
 
+# Highcharts for the Ruby language [https://github.com/michelson/lazy_high_charts]
+gem "lazy_high_charts"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
