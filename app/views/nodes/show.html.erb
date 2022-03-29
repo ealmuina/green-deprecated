@@ -1,0 +1,12 @@
+<% provide(:title, @node.chip_id) %>
+
+<h1><%= @node.chip_id %></h1>
+
+<p><b>Type</b>: <%= @node.node_type %></p>
+<p><b>Min. moisture</b>: <%= @node.min_moisture %></p>
+<p><b>Max. moisture</b>: <%= @node.max_moisture %></p>
+<p><b>Current moisture</b>: <%= @node.current_moisture %></p>
+<p><b>Is Open?</b>: <i class="bi bi-circle-fill" style="color: <%= @node.open? ? 'green' : 'red' %>"></i></p>
+<p><b>Last seen</b>: <%= @node.last_seen %></p>
+
+<%= high_chart("some_id", @chart) %>

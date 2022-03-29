@@ -7,4 +7,12 @@ class Node < ApplicationRecord
   has_many :valves, class_name: 'Node', foreign_key: 'pump_id'
 
   has_many :records
+
+  def current_moisture
+    records.last&.moisture
+  end
+
+  def last_seen
+    records.last&.created_at
+  end
 end
