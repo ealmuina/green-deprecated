@@ -178,6 +178,8 @@ GEM
     reline (0.3.1)
       io-console (~> 0.5)
     rexml (3.2.5)
+    ruby-debug-ide (0.7.3)
+      rake (>= 0.8.1)
     rubyzip (2.3.2)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -239,6 +241,7 @@ DEPENDENCIES
   paho-mqtt
   puma (~> 5.0)
   rails (~> 7.0.2, >= 7.0.2.3)
+  ruby-debug-ide
   sassc-rails
   selenium-webdriver
   sprockets-rails

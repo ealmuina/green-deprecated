@@ -1,0 +1,30 @@
+<% provide(:title, "Plants") %>
+
+<h1>Plants</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Type</th>
+      <th scope="col">Min. moisture</th>
+      <th scope="col">Max. moisture</th>
+      <th scope="col">Current moisture</th>
+      <th scope="col">Is Open?</th>
+      <th scope="col">Last seen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @nodes.each do |node| %>
+      <tr>
+        <th scope="row"><%= node.chip_id %></th>
+        <td><%= node.node_type %></td>
+        <td><%= node.min_moisture %></td>
+        <td><%= node.max_moisture %></td>
+        <td><%= node.records.last&.moisture %></td>
+        <td><i class="bi bi-circle-fill" style="color: <%= node.open? ? 'green' : 'red' %>"></i></td>
+        <td><%= node.records.last&.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
