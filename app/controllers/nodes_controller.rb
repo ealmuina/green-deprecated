@@ -1,10 +1,10 @@
 class NodesController < ApplicationController
   def index
-    @nodes = Node.all
+    @nodes = Node.includes(:records).all
   end
 
   def show
-    @node = Node.find(params[:id])
+    @node = Node.includes(:records).find(params[:id])
   end
 
   def new
