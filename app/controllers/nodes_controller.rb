@@ -14,13 +14,14 @@ class NodesController < ApplicationController
           { value: @node.max_moisture, color: 'green', dashStyle: 'shortdash', width: 2, label: { text: "Max. moisture" } },
           { value: @node.min_moisture, color: 'red', dashStyle: 'shortdash', width: 2, label: { text: "Min. moisture" } },
         ],
-        min: 250,
-        max: 500
+        min: -500,
+        max: -250
       )
 
       f.xAxis(type: 'datetime', title: { text: "Date" })
 
       f.series(
+        name: @node.chip_id,
         data: @node.records.select(:created_at, :moisture).map do |record|
           [record.created_at.to_i * 1000, record.moisture]
         end
