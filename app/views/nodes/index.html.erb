@@ -10,7 +10,8 @@
       <th scope="col">Min. moisture</th>
       <th scope="col">Max. moisture</th>
       <th scope="col">Current moisture</th>
-      <th scope="col">Is Open?</th>
+      <th scope="col">Active?</th>
+      <th scope="col">Open?</th>
       <th scope="col">Last seen</th>
     </tr>
   </thead>
@@ -22,6 +23,7 @@
         <td><%= node.min_moisture %></td>
         <td><%= node.max_moisture %></td>
         <td><%= node.current_moisture %></td>
+        <td><i class="bi bi-circle-fill" style="color: <%= node.active? ? 'green' : 'red' %>"></i></td>
         <td><i class="bi bi-circle-fill" style="color: <%= node.open? ? 'green' : 'red' %>"></i></td>
         <td><%= node.last_seen %></td>
       </tr>

@@ -18,10 +18,13 @@ if ENV['RAILS_ENV'] != 'test' && defined?(::Rails::Server)
       node = Node.find_by(chip_id: payload['node_id'])
 
       if node
+        # Create new record
         Record.create(
           node: node,
           moisture: payload['moisture']
         )
+        # Update Node status
+        node.update open?: payload['is_open']
       end
     end
   end
