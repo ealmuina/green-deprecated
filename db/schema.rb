@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_25_123229) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_04_195220) do
   create_table "firmwares", force: :cascade do |t|
     t.integer "node_type"
     t.integer "version"
@@ -27,6 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_25_123229) do
     t.boolean "open?", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "max_pumping_time", default: 30
     t.index ["chip_id"], name: "unique_chip_ids", unique: true
     t.index ["pump_id"], name: "index_nodes_on_pump_id"
   end

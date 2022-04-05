@@ -33,5 +33,10 @@ module App
     logger = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
+
+    # Start periodic jobs
+    config.after_initialize do
+      NodeSettingsRefreshJob.perform_later
+    end
   end
 end

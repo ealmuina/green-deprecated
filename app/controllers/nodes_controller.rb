@@ -11,8 +11,20 @@ class NodesController < ApplicationController
       f.yAxis(
         title: { text: "Soil moisture" },
         plotLines: [
-          { value: @node.max_moisture, color: 'green', dashStyle: 'shortdash', width: 2, label: { text: "Max. moisture" } },
-          { value: @node.min_moisture, color: 'red', dashStyle: 'shortdash', width: 2, label: { text: "Min. moisture" } },
+          {
+            value: @node.max_moisture,
+            color: 'green',
+            dashStyle: 'shortdash',
+            width: 2,
+            label: { text: "Max. moisture" }
+          },
+          {
+            value: @node.min_moisture,
+            color: 'red',
+            dashStyle: 'shortdash',
+            width: 2,
+            label: { text: "Min. moisture" }
+          },
         ],
         min: -500,
         max: -250
