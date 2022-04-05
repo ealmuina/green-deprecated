@@ -15,4 +15,8 @@ class Node < ApplicationRecord
   def last_seen
     records.last&.created_at
   end
+
+  def active?
+    last_seen && Time.now - last_seen < 2.hour
+  end
 end
