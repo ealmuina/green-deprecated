@@ -9,4 +9,4 @@
 <p><b>Is Open?</b>: <i class="bi bi-circle-fill" style="color: <%= @node.open? ? 'green' : 'red' %>"></i></p>
 <p><b>Last seen</b>: <%= @node.last_seen %></p>
 
-<%= high_chart("some_id", @chart) %>
+<%= high_chart("records_chart", @chart) %>
