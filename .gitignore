@@ -39,3 +39,6 @@
 
 # Ignore environment variables
 /.env
+
+# Ignore firmware files
+/app/assets/firmware/*
