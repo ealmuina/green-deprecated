@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_04_195220) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_18_172916) do
   create_table "firmwares", force: :cascade do |t|
     t.integer "node_type"
     t.integer "version"
@@ -38,6 +38,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_04_195220) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["node_id"], name: "index_records_on_node_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["username"], name: "unique_usernames", unique: true
   end
 
   add_foreign_key "records", "nodes"
