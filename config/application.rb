@@ -35,8 +35,10 @@ module App
     config.logger = ActiveSupport::TaggedLogging.new(logger)
 
     # Start periodic jobs
-    config.after_initialize do
-      NodeSettingsRefreshJob.perform_later
+    if ENV['RAILS_ENV'] != 'test' && defined?(::Rails::Server)
+      config.after_initialize do
+        NodeSettingsRefreshJob.perform_later
+      end
     end
   end
 end
